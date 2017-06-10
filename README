@@ -1,0 +1,7 @@
+Execute in the following order
+
+getJoinTree.py : Replace file name every time within code - Get Nodes and Arcs
+read-arcs-nodes.py: Pass file name of Nodes and Arcs as argument - Get a CSV and a dot file
+make-graph.py: Pass the CT CSV as argument - Retrieve 4 dictionaries
+edit-distance.py: Using the 4 dictionaries - Pass the names to be compared
+distance-test.py - Tests the edit distance by using two random trees
