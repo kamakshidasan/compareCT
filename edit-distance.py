@@ -1,35 +1,49 @@
 import itertools
 import sys
 import pickle
+import random
+import time
 
 # Only me and god knows how this code works
 # In a few days only god will now
 
+#[filename1,filename2] = random.sample(range(0,1002),2)
+#filename1 = 'tv_'+filename1
+#filename2 = 'tv_'+filename2
+
 filename1 =  sys.argv[1]
 filename2 = sys.argv[2]
 
-with open(filename1+'-right.txt', 'rb') as handle:
+start_time = time.time()
+
+parent_path = '/home/raghavendra/Desktop/adhitya/'
+dictionary_path = parent_path + 'dictionary/'
+
+dictionary1 = dictionary_path + filename1
+dictionary2 = dictionary_path + filename2
+
+with open(dictionary1+'-right.txt', 'rb') as handle:
   r1 = pickle.loads(handle.read())
 
-with open(filename2+'-right.txt', 'rb') as handle:
+with open(dictionary2+'-right.txt', 'rb') as handle:
   r2 = pickle.loads(handle.read())
 
-with open(filename1+'-parent.txt', 'rb') as handle:
+with open(dictionary1+'-parent.txt', 'rb') as handle:
   p1 = pickle.loads(handle.read())
 
-with open(filename2+'-parent.txt', 'rb') as handle:
+with open(dictionary2+'-parent.txt', 'rb') as handle:
   p2 = pickle.loads(handle.read())
 
-with open(filename1+'-labels.txt', 'rb') as handle:
+with open(dictionary1+'-labels.txt', 'rb') as handle:
   l1 = pickle.loads(handle.read())
 
-with open(filename2+'-labels.txt', 'rb') as handle:
+with open(dictionary2+'-labels.txt', 'rb') as handle:
   l2 = pickle.loads(handle.read())
 
-with open(filename1+'-difference.txt', 'rb') as handle:
+with open(dictionary1+'-difference.txt', 'rb') as handle:
   d1 = pickle.loads(handle.read())
 
-with open(filename2+'-difference.txt', 'rb') as handle:
+with open(dictionary2+'-difference.txt', 'rb') as handle:
   d2 = pickle.loads(handle.read())
 
 size1 = len(p1.keys())
@@ -58,7 +72,7 @@ def checkBadExtents2(j1, j):
 
 
 def Qf(i1, i, j1, j):
-   #print i1, i, j1, j
+    print i1, i, j1, j
 
     try:
         Q[i1][i][j1][j] += 0
@@ -96,7 +110,7 @@ def Qf(i1, i, j1, j):
 
 
 def Q1f(i1, i, j1, j):
-    #print i1, i, j1, j
+    print i1, i, j1, j
 
     try:
         Q1[i1][i][j1][j] += 0
@@ -140,7 +154,7 @@ def Q1f(i1, i, j1, j):
 
 
 def Q2f(i1, i, j1, j):
-    #print i1, i, j1, j
+    print i1, i, j1, j
 
     try:
         Q2[i1][i][j1][j] += 0
@@ -190,4 +204,12 @@ for i1, j1 in itertools.product(range(1, size1+1), range(1, size2+1)):
             Q[i1][i][j1][j] = Qf(i1, i, j1, j)
             # print i1, i, j, j1
 
-print Q[1][1][size1][size2]
+
+print "echo \'<html><img src=\"images/"+ filename1 +".png\"\"/><img src=\"images/"+ filename2 +".png\"\"/></html>\';"
+
+print 'Difference: ', Q[1] [r1[1]] [1] [r2[1]]
+
+seconds = time.time() - start_time
+m, s = divmod(seconds, 60)
+h, m = divmod(m, 60)
+print "%d:%02d:%02d" % (h, m, s)
