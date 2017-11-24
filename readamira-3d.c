@@ -138,6 +138,7 @@ int main(int argc, char** argv)
 			myfile.open(output_filename);
 
 			myfile << "# vtk DataFile Version 2.0" << endl;
+			// change this to a better name based on input filename
 			myfile << "vtk speed" << endl;
 			myfile << "ASCII" << endl;
 			myfile << "DATASET STRUCTURED_POINTS" << endl;
